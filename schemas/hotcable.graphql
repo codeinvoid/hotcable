@@ -1,0 +1,87 @@
+schema {
+  query: Query
+}
+
+type Query {
+    user(uuid: String!): User
+}
+
+type User {
+    id: ID!
+    uuid: String!
+    logs: [Log]
+}
+
+type Log {
+    id: ID! 
+    type: LogType!
+    content: Content!
+}
+
+#-------------------#
+#      Content      #
+#-------------------#
+
+interface Content {
+    id: ID!
+    time: Time!
+}
+
+type TimeContent implements Content {
+    id: ID!
+    time: Time!
+    times: [Times!]!
+}
+
+type CommonContent implements Content {
+    id: ID!
+    time: Time!
+    content: String!
+}
+
+type BannedContent implements Content {
+    id: ID!
+    time: Time!
+    content: String!
+}
+
+type ReportContent implements Content {
+    id: ID!
+    time: Time!
+    content: String!
+}
+
+type Times {
+    id: ID!
+    type: String!
+    date: String
+    list: [Time!]!
+}
+
+type Time {
+    id: ID!
+    event: Event!
+    count: String!
+}
+
+enum Info {
+    ACTIVE
+    UNACTIVE
+    BANNED
+    WATCHING
+}
+
+enum Event {
+    REGI
+    JOIN
+    LEFT
+    BAND
+    LOGS
+}
+
+enum LogType {
+    BANNED
+    MESSAGE
+    REPORT
+    TIME
+}

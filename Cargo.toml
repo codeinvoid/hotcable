@@ -2,5 +2,15 @@
 name = "hotcable"
 version = "0.1.0"
 edition = "2021"
+build = "build.rs"
+
 
 [dependencies]
+axum = "0.7.5"
+cynic = "3.7.3"
+
+[build-dependencies]
+cynic-codegen = { version = "3" }
+
+[dev-dependencies]
+insta = "1"
